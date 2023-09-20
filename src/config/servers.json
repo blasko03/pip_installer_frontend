@@ -1,45 +1,6 @@
 [
     {
-        "address": "http://172.105.94.175:23487",
-        "name": "prova1"
-    },
-    {
-        "address": "http://10.30.45.1",
-        "name": "prova26"
-    },
-    {
-        "address": "http://10.30.45.1",
-        "name": "prohfva2"
-    },
-    {
-        "address": "http://10.30.45.1",
-        "name": "prjova2"
-    },
-    {
-        "address": "http://10.30.45.1",
-        "name": "projva2"
-    },
-
-    {
-        "address": "http://10.30.45.1",
-        "name": "proyva2"
-    },
-
-    {
-        "address": "http://10.30.45.1",
-        "name": "provaui2"
-    },
-
-    {
-        "address": "http://10.30.45.1",
-        "name": "provaiy2"
-    },
-    {
-        "address": "http://10.30.45.1",
-        "name": "provyia2"
-    },
-    {
-        "address": "http://10.30.45.171:8000",
-        "name": "Luka"
+        "address": "http://127.0.0.1:23487",
+        "name": "server1"
     }
 ]
