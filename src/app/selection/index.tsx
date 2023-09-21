@@ -12,7 +12,7 @@ interface KeyboardEvent {
   key: string
 }
 
-function ascending(a: string, b: string) {
+function ascending (a: string, b: string): number {
   if (a > b) {
     return 1
   }
