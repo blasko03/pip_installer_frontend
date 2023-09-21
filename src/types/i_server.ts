@@ -1,4 +1,4 @@
 export interface IServer {
-    name: string
-    address: string
+  name: string
+  address: string
 }
