@@ -1,7 +1,7 @@
 import { type IResponseData } from '@/pages/api/install'
 import { type ReactElement, useEffect, useRef } from 'react'
 
-export default function InstallResponse ({ response, scrolled }: { response: IResponseData | undefined, scrolled: any }): ReactElement {
+export default function InstallResponse ({ response, event }: { response: IResponseData | undefined, event: any }): ReactElement {
   const ref = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
@@ -20,8 +20,8 @@ export default function InstallResponse ({ response, scrolled }: { response: IRe
     const scroll = (scrolled: string): void => {
       ref.current?.scrollBy(0, scrollAmmount(scrolled))
     }
-    scroll(scrolled.direction)
-  }, [scrolled])
+    scroll(event.action)
+  }, [event])
 
   return <code ref={ref} className={['fullscreen', 'response', response !== undefined && 'active', response?.return_code !== 0 && 'error'].join(' ')} style={{ whiteSpace: 'break-spaces', overflow: 'scroll' }}>
     <h3>StdOut</h3>
