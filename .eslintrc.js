@@ -7,7 +7,9 @@ module.exports = {
     extends: [
       'plugin:react/recommended',
       'standard-with-typescript',
-      'plugin:react/jsx-runtime'
+      'plugin:react/jsx-runtime',
+      "plugin:react/recommended",
+      "next/core-web-vitals"
     ],
     overrides: [
     ],
