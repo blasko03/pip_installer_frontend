@@ -12,18 +12,22 @@ interface KeyboardEvent {
   key: string
 }
 
-export default function Selection (): ReactElement {
-  const servers: IServer[] = _servers.sort(function (a, b) {
-    if (a.name > b.name) {
-      return 1
-    }
-    if (a.name < b.name) {
-      return -1
-    }
+function ascending(a: string, b: string) {
+  if (a > b) {
+    return 1
+  }
+  if (a < b) {
+    return -1
+  }
 
-    return 0
+  return 0
+}
+
+export default function Selection (): ReactElement {
+  const servers: IServer[] = _servers.sort(function (a: IServer, b: IServer) {
+    return ascending(a.name, b.name)
   })
-  const models: string[] = _models.sort((a, b) => a - b)
+  const models: string[] = _models.sort(ascending)
   const [selectedServer, setSelectedServer] = useState(0)
   const [selectedModel, setSelectedModel] = useState(0)
   const [selectedConfirmation, setSelectedConfirmation] = useState(0)
