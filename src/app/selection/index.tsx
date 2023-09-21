@@ -23,7 +23,7 @@ export default function Selection (): ReactElement {
 
     return 0
   })
-  const models: string[] = _models.sort()
+  const models: string[] = _models.sort((a, b) => a - b)
   const [selectedServer, setSelectedServer] = useState(0)
   const [selectedModel, setSelectedModel] = useState(0)
   const [selectedConfirmation, setSelectedConfirmation] = useState(0)
