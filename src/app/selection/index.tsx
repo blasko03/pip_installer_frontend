@@ -4,18 +4,18 @@ import Phases from './phases'
 export default function Selection (): ReactElement {
   const [event, setEvent] = useState<any>({ })
 
+  const keyEvents = [
+    { action: 'up', keys: ['ArrowUp', 'a'] },
+    { action: 'down', keys: ['ArrowDown', 'c'] },
+    { action: 'enter', keys: ['Enter', 'b'] }
+  ]
+
+  function handleKeyDown (this: Document, ev: KeyboardEvent): void {
+    const event = keyEvents.filter(e => e.keys.includes(ev.key))[0]
+    if (event != null) { setEvent({ action: event.action }) }
+  }
+
   useEffect(() => {
-    function handleKeyDown (this: Document, ev: KeyboardEvent): void {
-      if (['ArrowUp', 'a'].includes(ev.key)) {
-        setEvent({ action: 'up' })
-      }
-      if (['ArrowDown', 'c'].includes(ev.key)) {
-        setEvent({ action: 'down' })
-      }
-      if (['Enter', 'b'].includes(ev.key)) {
-        setEvent({ action: 'enter' })
-      }
-    }
     document.addEventListener('keydown', handleKeyDown)
     return function cleanup () {
       document.removeEventListener('keydown', handleKeyDown)

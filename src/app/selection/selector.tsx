@@ -1,6 +1,8 @@
 import { type ReactElement, useEffect, useRef, useState } from 'react'
 
-export default function Selector ({ list, selected, active, title }: { list: string[], selected: number, active: boolean, title: string }): ReactElement {
+interface Props { list: string[], selected: number, active: boolean, title: string }
+
+export default function Selector ({ list, selected, active, title }: Props): ReactElement {
   const [height, setHeight] = useState<number>(0)
   const ref = useRef<HTMLDivElement>(null)
   const elementHeight = 40
