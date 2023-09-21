@@ -27,7 +27,7 @@ jobs:
         cache: 'npm'
     - run: mkdir src/config
     - run: echo "[]" > src/config/servers.json
-    - run: echo "[]" > src/config/models.jsson
+    - run: echo "[]" > src/config/models.json
     - run: npm install
     - run: npm run lint
     - run: npm ci
