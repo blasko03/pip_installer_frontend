@@ -25,6 +25,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - run: mkdir src/config
+    - run: echo "[]" > src/config/servers.js
+    - run: echo "[]" > src/config/models.js
     - run: npm install
     - run: npm run lint
     - run: npm ci
