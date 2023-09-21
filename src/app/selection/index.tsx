@@ -13,8 +13,17 @@ interface KeyboardEvent {
 }
 
 export default function Selection() {
-  const servers: IServer[] = _servers
-  const models: string[] = _models
+  const servers: IServer[] = _servers.sort(function(a, b) {
+    if (a.name > b.name) {
+      return 1;
+    }
+    if (a.name < b.name) {
+      return -1;
+    }
+
+    return 0;
+  });
+  const models: string[] = _models.sort()
   const [selectedServer, setSelectedServer] = useState(0);
   const [selectedModel, setSelectedModel] = useState(0);
   const [selectedConfirmation, setSelectedConfirmation] = useState(0);
@@ -23,9 +32,9 @@ export default function Selection() {
   const [scrolled, setScrolled] = useState<any>({direction: 'up'});
 
   const phases = useMemo(() => [
-    { update: setSelectedServer, selection: selectedServer, elements: servers.map (x => x.name), name: "servers", title: 'Seleziona server' },
-    { update: setSelectedModel, selection: selectedModel, elements: models, name: "models", title: 'Seleziona modello' },
-    { update: setSelectedConfirmation, selection: selectedConfirmation, elements: ['YES', 'NO'], name: "confirmation", confirmation: true, title: 'Confermi' },
+    { update: setSelectedServer, selection: selectedServer, elements: servers.map (x => x.name), name: "servers", title: 'Select server' },
+    { update: setSelectedModel, selection: selectedModel, elements: models, name: "models", title: 'Select package' },
+    { update: setSelectedConfirmation, selection: selectedConfirmation, elements: ['YES', 'NO'], name: "confirmation", confirmation: true, title: 'Confirm' },
   ], [servers, models, selectedConfirmation, selectedModel, selectedServer])
 
   useEffect(() => {
