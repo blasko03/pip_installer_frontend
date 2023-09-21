@@ -16,11 +16,14 @@ export default async function handler (
   req: NextApiRequest,
   res: NextApiResponse<IResponseData>
 ): Promise<void> {
+  if (process.env.PIP_SERVER_USERNAME == null || process.env.PIP_SERVER_PASSWORD == null) {
+    throw new Error('Env variables not set correctly!')
+  }
   const body: IRequestData = req.body
   const response = await fetch(`${body.server.address}/install`, {
     method: 'POST',
     headers: {
-      Authorization: 'Basic ' + btoa('#{process.env.pip_server_username}:#{process.env.pip_server_password}'),
+      Authorization: 'Basic ' + btoa(`${process.env.PIP_SERVER_USERNAME}:${process.env.PIP_SERVER_PASSWORD}`),
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ package: body.modelName })
