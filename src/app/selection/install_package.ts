@@ -1,10 +1,10 @@
 import { type IResponseData } from '@/pages/api/install'
 import { type IServer } from '@/types/i_server'
 
-export async function installModel (modelName: string, server: IServer, setResponse: (params: IResponseData) => void): Promise<void> {
+export async function installPackage (packageName: string, server: IServer, setResponse: (params: IResponseData) => void): Promise<void> {
   setResponse({ return_code: 0, std_out: 'Waiting response' })
   try {
-    const response = await callBackend(modelName, server)
+    const response = await callBackend(packageName, server)
     if (response.status >= 300) { throw new Error('Resoinse error!') }
     setResponse(await response.json())
   } catch (error) {
@@ -12,14 +12,14 @@ export async function installModel (modelName: string, server: IServer, setRespo
   }
 }
 
-async function callBackend (modelName: string, server: IServer): Promise<Response> {
+async function callBackend (packageName: string, server: IServer): Promise<Response> {
   return await fetch('/api/install', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      modelName,
+      modelName: packageName,
       server
     })
   })

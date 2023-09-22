@@ -8,7 +8,7 @@ export interface IResponseData {
 }
 
 interface IRequestData {
-  modelName: string
+  packageName: string
   server: IServer
 }
 
@@ -26,7 +26,7 @@ export default async function handler (
       Authorization: 'Basic ' + btoa(`${process.env.PIP_SERVER_USERNAME}:${process.env.PIP_SERVER_PASSWORD}`),
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ package: body.modelName })
+    body: JSON.stringify({ package: body.packageName })
   })
   res.status(response.status).json(await response.json())
 }
