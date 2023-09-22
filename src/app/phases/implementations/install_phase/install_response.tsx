@@ -1,24 +1,24 @@
 import { type IResponseData } from '@/pages/api/install'
-import { type IKeyEvent } from '@/types/i_key_event'
+import { ACTIONS, type IKeyEvent } from '@/types/i_key_event'
 import { type ReactElement, useEffect, useRef } from 'react'
 
 export default function InstallResponse ({ response, event }: { response: IResponseData | undefined, event: IKeyEvent }): ReactElement {
   const ref = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
-    const scrollAmmount = (scrolled: string): number => {
+    const scrollAmmount = (scrolled: ACTIONS): number => {
       const ammount = 20
       switch (scrolled) {
-        case 'up':
+        case ACTIONS.UP:
           return -1 * ammount
-        case 'down':
+        case ACTIONS.DOWN:
           return ammount
         default:
           return 0
       }
     }
 
-    const scroll = (scrolled: string): void => {
+    const scroll = (scrolled: ACTIONS): void => {
       ref.current?.scrollBy(0, scrollAmmount(scrolled))
     }
     scroll(event.action)
