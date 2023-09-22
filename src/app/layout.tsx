@@ -10,11 +10,7 @@ export const metadata: Metadata = {
   description: 'App for managing pip packages'
 }
 
-export default function RootLayout ({
-  children
-}: {
-  children: React.ReactNode
-}): ReactElement {
+export default function RootLayout ({ children }: { children: React.ReactNode }): ReactElement {
   return (
     <html lang="en">
       <body className={inter.className}>{children}</body>
