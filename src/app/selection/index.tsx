@@ -1,9 +1,20 @@
-'use client'
-import { useEffect, type ReactElement, useState } from 'react'
+import { type ReactElement } from 'react'
 import Phases from './phases'
-import { type IKeyEvent } from '@/types/i_key_event'
+import _servers from '@/config/servers.json'
+import _packages from '@/config/packages.json'
+import { ascendingOrder } from '@/app/utils/ascendingOrder'
+import { type IServer } from '@/types/i_server'
+import KeyEventListner from '../key_event_listner'
+
+function PhasesWrapper (props: any): ReactElement {
+  return <Phases {...props} />
+}
+
 export default function Selection (): ReactElement {
-  const [event, setEvent] = useState<IKeyEvent>({ action: 'none' })
+  const servers: IServer[] = _servers.sort(function (a: IServer, b: IServer) {
+    return ascendingOrder(a.name, b.name)
+  })
+  const packages: string[] = _packages.sort(ascendingOrder)
 
   const keyEvents = [
     { action: 'up', keys: ['ArrowUp', 'a'] },
@@ -11,16 +22,7 @@ export default function Selection (): ReactElement {
     { action: 'enter', keys: ['Enter', 'b'] }
   ]
 
-  function handleKeyDown (this: Document, ev: KeyboardEvent): void {
-    const event = keyEvents.filter(e => e.keys.includes(ev.key))[0]
-    if (event != null) { setEvent({ action: event.action }) }
-  }
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown)
-    return function cleanup () {
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [])
-  return <Phases event = {event} />
+  return <KeyEventListner keyEvents={keyEvents}>
+       <PhasesWrapper {...{ servers, packages }} />
+    </KeyEventListner>
 }

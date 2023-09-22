@@ -2,19 +2,12 @@
 import { type ReactElement, useEffect, useState } from 'react'
 import Selector from './selector'
 import { type IServer } from '../../types/i_server'
-import _servers from '../../config/servers.json'
-import _packages from '../../config/packages.json'
 import { installPackage } from './install_package'
 import { type IResponseData } from '@/pages/api/install'
 import InstallResponse from './install_response'
-import { ascendingOrder } from '../utils/ascendingOrder'
 import { type IKeyEvent } from '@/types/i_key_event'
 
-export default function Phases ({ event }: { event: IKeyEvent }): ReactElement {
-  const servers: IServer[] = _servers.sort(function (a: IServer, b: IServer) {
-    return ascendingOrder(a.name, b.name)
-  })
-  const packages: string[] = _packages.sort(ascendingOrder)
+export default function Phases ({ event, servers, packages }: { event: IKeyEvent, servers: IServer[], packages: string[] }): ReactElement {
   const [selectedServer, setSelectedServer] = useState(0)
   const [selectedPackage, setSelectedPackage] = useState(0)
   const [selectedConfirmation, setSelectedConfirmation] = useState(0)
