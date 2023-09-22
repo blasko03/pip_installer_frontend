@@ -1,9 +1,9 @@
 import { useState, type ReactElement } from 'react'
 import { type IPhaseProps } from '@/types/i_phase_props'
 import { type IResponseData } from '@/pages/api/install'
-import { installPackage } from '../install_package'
-import InstallResponse from '../install_response'
-import GenericPhase from './generic_phase'
+import InstallResponse from './install_phase/install_response'
+import GenericPhase from '../generic_phase'
+import { installPackage } from './install_phase/install_request'
 
 const YES = 'Yes'
 const NO = 'No'
