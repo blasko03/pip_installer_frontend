@@ -1,4 +1,3 @@
-import { type IServer } from '@/types/i_server'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export interface IResponseData {
@@ -9,18 +8,15 @@ export interface IResponseData {
 
 interface IRequestData {
   packageName: string
-  server: IServer
+  server: string
 }
 
-export default async function handler (
-  req: NextApiRequest,
-  res: NextApiResponse<IResponseData>
-): Promise<void> {
+export default async function handler (req: NextApiRequest, res: NextApiResponse<IResponseData>): Promise<void> {
   if (process.env.PIP_SERVER_USERNAME == null || process.env.PIP_SERVER_PASSWORD == null) {
     throw new Error('Env variables not set correctly!')
   }
   const body: IRequestData = req.body
-  const response = await fetch(`${body.server.address}/install`, {
+  const response = await fetch(`${body.server}/install`, {
     method: 'POST',
     headers: {
       Authorization: 'Basic ' + btoa(`${process.env.PIP_SERVER_USERNAME}:${process.env.PIP_SERVER_PASSWORD}`),
