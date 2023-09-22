@@ -15,6 +15,7 @@ export default function GenericPhase ({ event, active, enterAction, values }: IG
 
   useEffect(() => {
     eventAction({ event, active, enterAction, values, setSelected, selected })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [event])
 
   return <Selector list = {values}

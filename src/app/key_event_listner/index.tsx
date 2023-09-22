@@ -16,6 +16,7 @@ export default function KeyEventListner ({ children, keyEvents }: { keyEvents: I
     return function cleanup () {
       document.removeEventListener('keydown', handleKeyDown)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return <>{cloneElement(children, { ...children.props, event })}</>
