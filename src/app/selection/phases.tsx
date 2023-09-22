@@ -8,28 +8,26 @@ import InstallResponse from './install_response'
 import { type IKeyEvent } from '@/types/i_key_event'
 
 export default function Phases ({ event, servers, packages }: { event: IKeyEvent, servers: IServer[], packages: string[] }): ReactElement {
-  const [selectedServer, setSelectedServer] = useState(0)
-  const [selectedPackage, setSelectedPackage] = useState(0)
-  const [selectedConfirmation, setSelectedConfirmation] = useState(0)
   const [currentPhase, setCurrentPhase] = useState(0)
   const [response, setResponse] = useState<IResponseData | undefined>(undefined)
+  const [phaseStatus, setPhaseStatus] = useState([0, 0, 0])
 
   const phases = [
-    { update: setSelectedServer, selection: selectedServer, elements: servers.map(x => x.name), name: 'servers', title: 'Select server' },
-    { update: setSelectedPackage, selection: selectedPackage, elements: packages, name: 'packages', title: 'Select package' },
-    { update: setSelectedConfirmation, selection: selectedConfirmation, elements: ['YES', 'NO'], name: 'confirmation', confirmation: true, title: 'Confirm' }
+    { elements: servers.map(x => x.name), name: 'servers', title: 'Select server' },
+    { elements: packages, name: 'packages', title: 'Select package' },
+    { elements: ['YES', 'NO'], name: 'confirmation', confirmation: true, title: 'Confirm' }
   ]
 
   const eventAction = (event: IKeyEvent): void => {
     if (event.action === 'up') {
-      phases[currentPhase].update(s => Math.max(s - 1, 0))
+      setPhaseStatus(status => status.map((x, i) => i === currentPhase ? Math.max(x - 1, 0) : x))
     }
     if (event.action === 'down') {
-      phases[currentPhase].update(s => Math.min(s + 1, phases[currentPhase].elements.length - 1))
+      setPhaseStatus(status => status.map((x, i) => i === currentPhase ? Math.min(x + 1, phases[currentPhase].elements.length - 1) : x))
     }
     if (event.action === 'enter') {
-      if (phases[currentPhase].confirmation === true && selectedConfirmation === 0 && response === undefined) {
-        void installPackage(packages[selectedPackage], servers[selectedServer], setResponse)
+      if (phases[currentPhase].confirmation === true && phaseStatus[2] === 0 && response === undefined) {
+        void installPackage(packages[phaseStatus[1]], servers[phaseStatus[0]], setResponse)
       } else {
         setCurrentPhase(p => (p + 1) % phases.length)
         setResponse(undefined)
@@ -46,7 +44,7 @@ export default function Phases ({ event, servers, packages }: { event: IKeyEvent
       {
         phases.map((phase, index) => <Selector key = {phase.name}
                                                list = {phase.elements}
-                                               selected = {phase.selection}
+                                               selected = {phaseStatus[index]}
                                                title = {phase.title}
                                                active = {index === currentPhase} />)
       }
