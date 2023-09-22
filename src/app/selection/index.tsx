@@ -1,8 +1,9 @@
 'use client'
 import { useEffect, type ReactElement, useState } from 'react'
 import Phases from './phases'
+import { type IKeyEvent } from '@/types/i_key_event'
 export default function Selection (): ReactElement {
-  const [event, setEvent] = useState<any>({ })
+  const [event, setEvent] = useState<IKeyEvent>({ action: 'none' })
 
   const keyEvents = [
     { action: 'up', keys: ['ArrowUp', 'a'] },

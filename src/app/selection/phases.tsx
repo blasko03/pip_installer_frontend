@@ -8,8 +8,9 @@ import { installModel } from './install_model'
 import { type IResponseData } from '@/pages/api/install'
 import InstallResponse from './install_response'
 import { ascendingOrder } from '../utils/ascendingOrder'
+import { type IKeyEvent } from '@/types/i_key_event'
 
-export default function Phases ({ event }: { event: any }): ReactElement {
+export default function Phases ({ event }: { event: IKeyEvent }): ReactElement {
   const servers: IServer[] = _servers.sort(function (a: IServer, b: IServer) {
     return ascendingOrder(a.name, b.name)
   })
@@ -26,7 +27,7 @@ export default function Phases ({ event }: { event: any }): ReactElement {
     { update: setSelectedConfirmation, selection: selectedConfirmation, elements: ['YES', 'NO'], name: 'confirmation', confirmation: true, title: 'Confirm' }
   ]
 
-  const eventAction = (event: any): void => {
+  const eventAction = (event: IKeyEvent): void => {
     if (event.action === 'up') {
       phases[currentPhase].update(s => Math.max(s - 1, 0))
     }

@@ -1,7 +1,8 @@
 import { type IResponseData } from '@/pages/api/install'
+import { type IKeyEvent } from '@/types/i_key_event'
 import { type ReactElement, useEffect, useRef } from 'react'
 
-export default function InstallResponse ({ response, event }: { response: IResponseData | undefined, event: any }): ReactElement {
+export default function InstallResponse ({ response, event }: { response: IResponseData | undefined, event: IKeyEvent }): ReactElement {
   const ref = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
