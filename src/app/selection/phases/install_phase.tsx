@@ -13,7 +13,6 @@ export default function InstallPhase ({ event, active, nextPhase, phasesResults 
   const values = [YES, NO]
 
   function enterAction (selected: number): void {
-    console.log('event action')
     if (values[selected] === YES && response === undefined) {
       void installPackage(phasesResults.packageName, phasesResults.server, setResponse)
     } else {

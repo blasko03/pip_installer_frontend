@@ -11,7 +11,6 @@ export default function SelectServerPhase ({ event, active, nextPhase, setPhases
   })
 
   function enterAction (selected: number): void {
-    console.log(selected)
     setPhasesResults(p => ({ ...p, server: servers[selected].address }))
     nextPhase()
   }
