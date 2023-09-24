@@ -5,15 +5,17 @@ import InstallResponse from './install_phase/install_response'
 import GenericPhase from '../generic_phase'
 import { installPackage } from './install_phase/install_request'
 
-const YES = 'Yes'
-const NO = 'No'
+enum Actions {
+  YES = 'Yes',
+  NO = 'No'
+}
 
 export default function InstallPhase ({ event, active, nextPhase, phasesResults }: IPhaseProps): ReactElement {
   const [response, setResponse] = useState<IResponseData | undefined>(undefined)
-  const values = [YES, NO]
 
+  const values: string[] = Object.values(Actions)
   function enterAction (selected: number): void {
-    if (values[selected] === YES && response === undefined) {
+    if (values[selected] === Actions.YES && response === undefined) {
       void installPackage(phasesResults.packageName, phasesResults.server, setResponse)
     } else {
       setResponse(undefined)
