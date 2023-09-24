@@ -12,5 +12,5 @@ export default function SelectServerPhase ({ event, active, nextPhase, setPhases
     nextPhase()
   }
 
-  return <GenericPhase {...{ values, event, enterAction, active }} />
+  return <GenericPhase {...{ values, event, enterAction, active, title: 'Select package' }} />
 }

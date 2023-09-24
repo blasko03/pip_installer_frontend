@@ -24,7 +24,7 @@ export default function InstallPhase ({ event, active, nextPhase, phasesResults 
   }
 
   return <>
-    <GenericPhase {...{ values, event, enterAction, active }} />
+    <GenericPhase {...{ values, event, enterAction, active, title: 'Confirm' }} />
     <InstallResponse response={response} event={event} />
   </>
 }

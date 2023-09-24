@@ -5,12 +5,13 @@ import { type IKeyEvent } from '@/types/i_key_event'
 
 interface IGenericPhaseProps {
   event: IKeyEvent
+  title: string
   active: boolean
   enterAction: (selected: number) => void
   values: any[]
 }
 
-export default function GenericPhase ({ event, active, enterAction, values }: IGenericPhaseProps): ReactElement {
+export default function GenericPhase ({ event, active, enterAction, values, title }: IGenericPhaseProps): ReactElement {
   const [selected, setSelected] = useState(0)
 
   useEffect(() => {
@@ -20,6 +21,6 @@ export default function GenericPhase ({ event, active, enterAction, values }: IG
 
   return <Selector list = {values}
                    selected = {selected}
-                   title = {'Select package'}
+                   title = {title}
                    active = {active} />
 }

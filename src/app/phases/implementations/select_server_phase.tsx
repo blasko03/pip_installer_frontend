@@ -15,5 +15,5 @@ export default function SelectServerPhase ({ event, active, nextPhase, setPhases
     nextPhase()
   }
 
-  return <GenericPhase {...{ ...{ values: servers.map(x => x.name) }, event, enterAction, active }} />
+  return <GenericPhase {...{ ...{ values: servers.map(x => x.name) }, event, enterAction, active, ...{ title: 'Select server' } }} />
 }
