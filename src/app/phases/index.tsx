@@ -1,11 +1,11 @@
 'use client'
 import { type ReactElement, useState } from 'react'
 import { type IKeyEvent } from '@/types/i_key_event'
-import SelectServerPhase from './implementations/select_server_phase'
-import SelectPackagePhase from './implementations/select_package_phase'
-import InstallPhase from './implementations/install_phase'
+import { type IPhaseProps } from '@/types/i_phase_props'
 
-export default function Phases ({ event }: { event: IKeyEvent }): ReactElement {
+type IPhase = ({ event, active, nextPhase, setPhasesResults }: IPhaseProps) => ReactElement
+
+export default function Phases ({ event, phases }: { event: IKeyEvent, phases: IPhase[] }): ReactElement {
   const [currentPhase, setCurrentPhase] = useState(0)
   const [phasesResults, setPhasesResults] = useState({})
 
@@ -13,7 +13,6 @@ export default function Phases ({ event }: { event: IKeyEvent }): ReactElement {
     setCurrentPhase(p => (p + 1) % phases.length)
   }
 
-  const phases = [SelectServerPhase, SelectPackagePhase, InstallPhase]
   return (
     <>
       {
