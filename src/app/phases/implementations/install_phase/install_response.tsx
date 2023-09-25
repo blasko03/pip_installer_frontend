@@ -19,7 +19,9 @@ export default function InstallResponse ({ response, event }: { response: IRespo
     }
 
     const scroll = (scrolled: ACTIONS): void => {
-      ref.current?.scrollBy(0, scrollAmmount(scrolled))
+      if (ref.current?.scrollBy != null) {
+        ref.current?.scrollBy(0, scrollAmmount(scrolled))
+      }
     }
     scroll(event.action)
   }, [event])
