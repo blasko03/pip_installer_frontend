@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react'
 import packages from '@/config/packages.json'
-import { ascendingOrder } from '@/app/utils/ascendingOrder'
+import { ascendingOrder } from '@/app/utils/ascending_order'
 import { type IPhaseProps } from '@/types/i_phase_props'
 import GenericPhase from '../generic_phase'
 

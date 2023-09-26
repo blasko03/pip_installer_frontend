@@ -34,7 +34,7 @@ const fetch = jest.fn(async () =>
   })
 ) as jest.Mock
 
-test('two plus two is four', async () => {
+test('test interface to send request', async () => {
   global.fetch = fetch
   const { user } = setup(<Home />)
   await user.keyboard('[ArrowUp]')
