@@ -1,8 +1,6 @@
 import { type IServer } from '@/types/i_server'
 import Home from './page'
-import { render } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { type ReactElement } from 'react'
+import { setup } from './utils/testing_setup'
 
 function moduleList (): string[] {
   return ['module1', 'module2']
@@ -16,13 +14,6 @@ function serverList (): IServer[] {
 
 jest.mock('../config/packages.json', () => moduleList(), { virtual: true })
 jest.mock('../config/servers.json', () => serverList(), { virtual: true })
-
-function setup (jsx: ReactElement): any {
-  return {
-    user: userEvent.setup(),
-    ...render(jsx)
-  }
-}
 
 const fetch = jest.fn(async () =>
   await Promise.resolve({
